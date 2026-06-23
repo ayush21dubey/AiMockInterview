@@ -1,0 +1,134 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.dashboard-header-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.greet-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.greet-desc {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+}
+
+/* Stats Cards Grid */
+.stats-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+/* Splitscreen */
+.dashboard-splitscreen-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+}
+
+.split-left {
+  display: flex;
+  width: 100%;
+}
+
+.split-right {
+  display: flex;
+  width: 100%;
+}
+
+.dashboard-recommendation-card {
+  padding: 24px !important;
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 220px;
+  justify-content: space-between;
+}
+
+.rec-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.rec-card-text {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.rec-card-divider {
+  height: 1px;
+  background: var(--card-border);
+}
+
+.rec-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.rec-footer-label {
+  color: var(--text-muted);
+}
+
+.rec-footer-value {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* History Section */
+.dashboard-history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.section-heading-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+@media (max-width: 992px) {
+  .stats-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-splitscreen-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-header-panel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stats-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .greet-title {
+    font-size: 24px;
+  }
+}

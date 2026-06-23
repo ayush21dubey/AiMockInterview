@@ -1,0 +1,112 @@
+.chart-wrapper-card {
+  padding: 24px !important;
+  background: var(--card-bg);
+  width: 100%;
+}
+
+.chart-header {
+  margin-bottom: 20px;
+}
+
+.chart-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.chart-card-subtitle {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.svg-container {
+  position: relative;
+  width: 100%;
+}
+
+.chart-svg {
+  display: block;
+}
+
+.chart-grid-group {
+  opacity: 0.85;
+}
+
+.grid-line {
+  stroke: var(--card-border);
+  stroke-width: 1;
+  stroke-dasharray: 4,4;
+}
+
+.grid-label {
+  fill: var(--text-muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.date-axis-label {
+  fill: var(--text-muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* Points */
+.chart-point {
+  fill: var(--bg-secondary);
+  stroke: var(--primary-color);
+  stroke-width: 2.5;
+  transition: all var(--transition-fast);
+}
+
+.point-active {
+  stroke: var(--secondary-color);
+  fill: var(--secondary-color);
+  filter: drop-shadow(0 0 6px var(--secondary-glow));
+}
+
+/* Chart Tooltip */
+.chart-tooltip {
+  position: absolute;
+  z-index: 20;
+  padding: 10px;
+  border-radius: var(--border-radius-md);
+  font-size: 11px;
+  pointer-events: none;
+  min-width: 110px;
+  transform: translate(-50%, -100%);
+  background: var(--bg-secondary);
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.tooltip-role {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.tooltip-score {
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.tooltip-score span {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.tooltip-date {
+  color: var(--text-muted);
+  font-size: 9px;
+}
+
+.chart-no-data {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 13.5px;
+}

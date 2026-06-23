@@ -1,0 +1,105 @@
+.stats-widget-card {
+  padding: 20px !important;
+  background: var(--card-bg);
+}
+
+.stats-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stats-card-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-card-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.stats-card-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.stats-card-trend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trend-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+}
+
+.trend-badge.trend-up {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.trend-badge.trend-down {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.trend-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Icon Container */
+.stats-card-icon-container {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+/* Custom Color Themes */
+.sc-primary .stats-card-icon-container {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+}
+.sc-primary:hover {
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.sc-secondary .stats-card-icon-container {
+  background: rgba(168, 85, 247, 0.1);
+  color: var(--secondary-color);
+}
+.sc-secondary:hover {
+  border-color: rgba(168, 85, 247, 0.25);
+}
+
+.sc-cyan .stats-card-icon-container {
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--accent-cyan);
+}
+.sc-cyan:hover {
+  border-color: rgba(6, 182, 212, 0.25);
+}
+
+.sc-success .stats-card-icon-container {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+.sc-success:hover {
+  border-color: rgba(16, 185, 129, 0.25);
+}

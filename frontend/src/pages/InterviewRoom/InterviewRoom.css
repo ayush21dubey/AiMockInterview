@@ -1,0 +1,315 @@
+.interview-room-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Room Header Dashboard */
+.room-header-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-radius: var(--border-radius-lg);
+}
+
+.room-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.room-role-badge {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.room-lvl-badge {
+  padding: 4px 10px;
+  border-radius: var(--border-radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.room-lvl-badge.lvl-easy {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.room-lvl-badge.lvl-medium {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.room-lvl-badge.lvl-hard {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.room-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.room-exit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.room-exit-btn:hover {
+  background: var(--danger);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px var(--danger-glow);
+}
+
+/* Splitscreen Grid */
+.room-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.room-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Interviewer Side Panel */
+.interviewer-card {
+  padding: 24px !important;
+  background: var(--card-bg);
+}
+
+.interviewer-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  margin-bottom: 16px;
+}
+
+.avatar-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--success);
+  box-shadow: 0 0 8px var(--success);
+}
+
+.avatar-status-dot.active {
+  animation: blink 1.5s infinite;
+}
+
+.interviewer-header-icon {
+  color: var(--primary-color);
+}
+
+.avatar-video-box {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #000;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-gif-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+/* Candidate Side Panel */
+.candidate-card {
+  padding: 24px !important;
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.webcam-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+}
+
+.camera-toggle-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  font-weight: 500;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.camera-toggle-pill:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  border-color: var(--primary-color);
+}
+
+/* Webcam viewport */
+.webcam-viewport {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: #06070b;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.candidate-video-stream {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* Mirror camera stream */
+}
+
+/* Disabled/Offline Placeholder scanner */
+.webcam-disabled-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.webcam-scanner-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+}
+
+.scanner-gif-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 5;
+  color: var(--text-muted);
+}
+
+.scanner-cam-icon {
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.webcam-viewport .camera-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 10px;
+  border-radius: var(--border-radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+  letter-spacing: 0.05em;
+}
+
+.webcam-viewport .camera-status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-muted);
+  border-radius: 50%;
+}
+
+.webcam-viewport .camera-status-dot.active {
+  background-color: var(--danger);
+  box-shadow: 0 0 6px var(--danger);
+}
+
+/* Room pagination navigation layout */
+.room-nav-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Modal specific alerts */
+.exit-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.exit-warning-icon {
+  color: var(--warning);
+}
+
+.room-eval-loader {
+  padding: 60px 40px !important;
+  max-width: 500px;
+  margin: 80px auto;
+  text-align: center;
+  background: var(--card-bg);
+}
+
+@media (max-width: 900px) {
+  .room-grid {
+    grid-template-columns: 1fr;
+  }
+}
