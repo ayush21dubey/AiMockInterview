@@ -1,0 +1,129 @@
+.sidebar {
+  position: sticky;
+  top: 70px;
+  left: 0;
+  width: 240px;
+  height: calc(100vh - 70px);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--card-border);
+  border-top: none;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 0;
+  padding: 30px 16px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+}
+
+.sidebar-link-active {
+  background: var(--primary-glow);
+  color: var(--primary-color);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+.sidebar-link-active:hover {
+  background: var(--primary-glow);
+  color: var(--primary-color);
+}
+
+.sidebar-link-text {
+  font-family: var(--font-display);
+}
+
+/* Footer card */
+.sidebar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  padding: 12px;
+  border-radius: var(--border-radius-md);
+}
+
+.sidebar-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.sidebar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid var(--secondary-color);
+}
+
+.sidebar-user-text {
+  overflow: hidden;
+}
+
+.sidebar-username {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-role {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-logout-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.sidebar-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}

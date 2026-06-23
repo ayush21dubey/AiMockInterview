@@ -1,0 +1,258 @@
+.setup-page {
+  width: 100%;
+}
+
+.setup-header {
+  margin-bottom: 32px;
+}
+
+.setup-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.setup-subtitle {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.setup-form-container {
+  max-width: 700px;
+  width: 100%;
+}
+
+.setup-card {
+  padding: 36px 32px !important;
+  background: var(--card-bg);
+}
+
+.setup-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.setup-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.section-icon-accent {
+  color: var(--primary-color);
+}
+
+.setup-section-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.setup-role-input {
+  max-width: 400px;
+}
+
+.setup-divider {
+  height: 1px;
+  background: var(--card-border);
+  margin: 28px 0;
+}
+
+/* Options Row */
+.setup-options-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.setup-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setup-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.setup-difficulty-pills {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.difficulty-pill {
+  flex: 1;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.difficulty-pill:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
+
+.difficulty-pill.active {
+  color: white;
+  border-color: transparent;
+}
+
+.difficulty-pill.active.pill-easy {
+  background: var(--success);
+  box-shadow: 0 4px 12px var(--success-glow);
+}
+
+.difficulty-pill.active.pill-medium {
+  background: var(--warning);
+  box-shadow: 0 4px 12px var(--warning-glow);
+}
+
+.difficulty-pill.active.pill-hard {
+  background: var(--danger);
+  box-shadow: 0 4px 12px var(--danger-glow);
+}
+
+/* Default active color if not named pill (like questions count) */
+.difficulty-pill.active:not([class*="pill-"]) {
+  background: var(--primary-color);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+/* Mode Selection Cards */
+.setup-mode-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.setup-mode-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: rgba(255, 255, 255, 0.02);
+  position: relative;
+}
+
+.setup-mode-card:hover {
+  border-color: rgba(99, 102, 241, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.setup-mode-card.selected {
+  border-color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.mode-card-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mode-card-icon-wrapper.voice-icon {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+}
+
+.setup-mode-card.selected .mode-card-icon-wrapper.voice-icon {
+  background: var(--primary-color);
+  color: white;
+}
+
+.mode-card-icon-wrapper.text-icon {
+  background: rgba(168, 85, 247, 0.1);
+  color: var(--secondary-color);
+}
+
+.setup-mode-card.selected .mode-card-icon-wrapper.text-icon {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.mode-card-info {
+  flex: 1;
+}
+
+.mode-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.mode-card-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.mode-card-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.setup-mode-card.selected .mode-card-radio {
+  border-color: var(--primary-color);
+}
+
+.radio-circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all var(--transition-fast);
+}
+
+.setup-mode-card.selected .radio-circle {
+  background: var(--primary-color);
+}
+
+.setup-start-btn {
+  width: 100%;
+  margin-top: 36px;
+}
+
+@media (max-width: 600px) {
+  .setup-options-row {
+    grid-template-columns: 1fr;
+  }
+  .setup-mode-cards {
+    grid-template-columns: 1fr;
+  }
+  .setup-card {
+    padding: 24px 16px !important;
+  }
+}

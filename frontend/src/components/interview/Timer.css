@@ -1,0 +1,47 @@
+.timer-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border-color: var(--card-border);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: var(--glass-shadow);
+  transition: all var(--transition-fast);
+}
+
+.timer-icon {
+  color: var(--primary-color);
+}
+
+/* Warnings */
+.t-warning {
+  border-color: var(--warning);
+  color: var(--warning);
+  box-shadow: 0 0 10px var(--warning-glow);
+}
+
+.t-warning .timer-icon {
+  color: var(--warning);
+  animation: tick-pulse 1s infinite alternate;
+}
+
+.t-danger {
+  border-color: var(--danger);
+  color: var(--danger);
+  box-shadow: 0 0 10px var(--danger-glow);
+}
+
+.t-danger .timer-icon {
+  color: var(--danger);
+  animation: tick-pulse 0.5s infinite alternate;
+}
+
+@keyframes tick-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.15); opacity: 1; }
+}

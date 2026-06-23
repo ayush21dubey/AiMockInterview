@@ -1,0 +1,43 @@
+.card-panel {
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+/* Card Hover */
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .card-hover:hover {
+  box-shadow: 0 12px 40px -10px rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.18);
+}
+
+/* Card Glow option */
+.card-glow {
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Clickable state */
+.card-clickable {
+  cursor: pointer;
+}
+
+.card-clickable:active {
+  transform: translateY(-1px);
+}
