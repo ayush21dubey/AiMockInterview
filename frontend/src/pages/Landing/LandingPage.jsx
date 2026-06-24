@@ -1,4 +1,7 @@
-import React from 'react';
+// import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+// changes
 import { Link } from 'react-router-dom';
 import { ArrowRight, Brain, Volume2, Award, Sparkles, Shield, ChevronRight } from 'lucide-react';
 import Button from '../../components/common/Button';
@@ -6,6 +9,8 @@ import Card from '../../components/common/Card';
 import './LandingPage.css';
 
 export const LandingPage = () => {
+  const { currentUser } = useContext(AuthContext);
+  // changes
   return (
     <div className="landing-page">
       {/* Hero Section */}
@@ -30,11 +35,23 @@ export const LandingPage = () => {
           </p>
 
           <div className="hero-actions animate-fade-in">
-            <Link to="/signup">
-              <Button size="lg" variant="primary" icon={ArrowRight}>
-                Get Started Free
-              </Button>
-            </Link>
+{/* /* changes */}
+
+{/* <Link to="/signup">
+  <Button size="lg" variant="primary" icon={ArrowRight}>
+    Get Started Free
+  </Button>
+</Link> */}
+
+            {!currentUser && (
+  <Link to="/signup">
+    <Button size="lg" variant="primary" icon={ArrowRight}>
+      Get Started Free
+    </Button>
+  </Link>
+)}
+
+
             <a href="#features">
               <Button size="lg" variant="secondary">
                 Explore Features
@@ -141,11 +158,22 @@ export const LandingPage = () => {
         <div className="cta-panel glass-panel">
           <h2 className="cta-title">Ready to Ace Your Next Tech Interview?</h2>
           <p className="cta-text">Join thousands of software engineers and product managers practicing daily. Get instant evaluation analytics now.</p>
-          <Link to="/signup">
+
+
+          {/* <Link to="/signup">
             <Button size="lg" variant="primary" icon={ChevronRight}>
               Create Free Account
             </Button>
-          </Link>
+          </Link> */}
+
+          {!currentUser && (
+  <Link to="/signup">
+    <Button size="lg" variant="primary" icon={ChevronRight}>
+      Create Free Account
+    </Button>
+  </Link>
+)}
+
         </div>
       </section>
 
