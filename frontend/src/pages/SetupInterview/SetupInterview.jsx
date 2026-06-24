@@ -16,20 +16,28 @@ export const SetupInterview = () => {
   const [difficulty, setDifficulty] = useState('Medium');
   const [questionsCount, setQuestionsCount] = useState(5);
   const [mode, setMode] = useState('voice'); // 'voice' or 'text'
+  const [loading, setLoading] = useState(false);
 
-  const handleStart = (e) => {
+  const handleStart = async (e) => {
     e.preventDefault();
     const roleName = MOCK_ROLES.find(r => r.id === roleId)?.name || 'Frontend Engineer';
     
-    startNewInterview({
-      roleId,
-      roleName,
-      difficulty,
-      questionsCount: parseInt(questionsCount, 10),
-      mode
-    });
-    
-    navigate('/room');
+    setLoading(true);
+    try {
+      await startNewInterview({
+        roleId,
+        roleName,
+        difficulty,
+        questionsCount: parseInt(questionsCount, 10),
+        mode
+      });
+      navigate('/room');
+    } catch (err) {
+      console.error(err);
+      alert("Failed to initiate interview session. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const difficultyLevels = ['Easy', 'Medium', 'Hard'];
@@ -162,8 +170,9 @@ export const SetupInterview = () => {
             size="lg"
             icon={ChevronRight}
             className="setup-start-btn"
+            disabled={loading}
           >
-            Initiate Interview Session
+            {loading ? "Generating Interview Questions..." : "Initiate Interview Session"}
           </Button>
         </Card>
       </form>

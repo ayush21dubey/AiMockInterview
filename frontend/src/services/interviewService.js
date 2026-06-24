@@ -1,44 +1,46 @@
-import { MOCK_HISTORY } from '../data/mockData';
-
-const HISTORY_KEY = 'ai_interview_history';
+import request from './api';
 
 export const interviewService = {
-  getHistory: () => {
-    const history = localStorage.getItem(HISTORY_KEY);
-    if (!history) {
-      // Seed with mock history initially
-      localStorage.setItem(HISTORY_KEY, JSON.stringify(MOCK_HISTORY));
-      return MOCK_HISTORY;
-    }
-    return JSON.parse(history);
+  createInterview: async (config) => {
+    return request('/interview/create', {
+      method: 'POST',
+      body: JSON.stringify(config)
+    });
   },
 
-  getInterviewById: (id) => {
-    const history = interviewService.getHistory();
-    return history.find(item => item.id === id) || null;
+  startInterview: async (id) => {
+    return request(`/interview/${id}/start`, {
+      method: 'POST'
+    });
   },
 
-  saveInterview: (interviewData) => {
-    const history = interviewService.getHistory();
-    
-    const newRecord = {
-      id: `hist_${Date.now()}`,
-      date: new Date().toISOString().split('T')[0],
-      ...interviewData,
-      status: "Completed"
-    };
-
-    history.unshift(newRecord); // Add to the top
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-    
-    // Increment total count in stats if wanted, or we compute aggregates dynamically
-    return newRecord;
+  saveAnswer: async (id, questionId, answer) => {
+    return request(`/interview/${id}/answer`, {
+      method: 'POST',
+      body: JSON.stringify({ questionId, answer })
+    });
   },
 
-  deleteInterview: (id) => {
-    const history = interviewService.getHistory();
-    const updated = history.filter(item => item.id !== id);
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
-    return updated;
+  submitInterview: async (id, durationSeconds) => {
+    return request(`/interview/${id}/submit`, {
+      method: 'POST',
+      body: JSON.stringify({ durationSeconds })
+    });
+  },
+
+  getHistory: async () => {
+    return request('/interview/history');
+  },
+
+  getInterviewById: async (id) => {
+    return request(`/interview/${id}`);
+  },
+
+  deleteInterview: async (id) => {
+    return request(`/interview/${id}`, {
+      method: 'DELETE'
+    });
   }
 };
+
+export default interviewService;

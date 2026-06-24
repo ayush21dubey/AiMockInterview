@@ -13,14 +13,21 @@ export const Feedback = () => {
   const [expandedQs, setExpandedQs] = useState({});
 
   useEffect(() => {
-    const data = interviewService.getInterviewById(id);
-    if (data) {
-      setRecord(data);
-      // Auto-expand first question
-      if (data.feedback?.qaList?.length > 0) {
-        setExpandedQs({ [data.feedback.qaList[0].id]: true });
+    const fetchFeedback = async () => {
+      try {
+        const data = await interviewService.getInterviewById(id);
+        if (data) {
+          setRecord(data);
+          // Auto-expand first question
+          if (data.feedback?.qaList?.length > 0) {
+            setExpandedQs({ [data.feedback.qaList[0].id]: true });
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load interview feedback", err);
       }
-    }
+    };
+    fetchFeedback();
   }, [id]);
 
   const toggleExpand = (qId) => {

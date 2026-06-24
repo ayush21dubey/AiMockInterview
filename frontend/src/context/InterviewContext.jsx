@@ -1,7 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { interviewService } from '../services/interviewService';
-import { aiService } from '../services/aiService';
-import { INTERVIEW_QUESTIONS } from '../data/mockData';
 
 export const InterviewContext = createContext(null);
 
@@ -11,45 +9,56 @@ export const InterviewProvider = ({ children }) => {
   const [activeSession, setActiveSession] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const loadHistory = async () => {
+    try {
+      const records = await interviewService.getHistory();
+      setHistory(records || []);
+    } catch (err) {
+      console.error("Failed to load interview history", err);
+    }
+  };
+
   useEffect(() => {
-    // Initial history fetch
-    const records = interviewService.getHistory();
-    setHistory(records);
+    loadHistory();
   }, []);
 
-  const loadHistory = () => {
-    const records = interviewService.getHistory();
-    setHistory(records);
+  const startNewInterview = async (config) => {
+    setLoading(true);
+    try {
+      // 1. Create interview on backend (fetches dynamic questions from Groq/Fallback)
+      const interview = await interviewService.createInterview(config);
+      
+      // 2. Start session on backend
+      await interviewService.startInterview(interview._id);
+
+      // 3. Set local context state
+      setCurrentInterview({
+        id: interview._id,
+        roleId: interview.roleId,
+        roleName: interview.roleName,
+        difficulty: interview.difficulty,
+        mode: interview.mode,
+        questions: interview.questions,
+        currentQuestionIndex: 0,
+        answers: {},
+        durationSeconds: 0,
+        startedAt: interview.startedAt
+      });
+      
+      setActiveSession(true);
+      return interview._id;
+    } catch (error) {
+      console.error("Failed to start new interview session", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const startNewInterview = (config) => {
-    const { roleId, roleName, difficulty, questionsCount, mode } = config;
-    
-    // Fetch appropriate questions
-    const allQuestions = INTERVIEW_QUESTIONS[roleId] || INTERVIEW_QUESTIONS.frontend;
-    
-    // Shuffle and slice questions based on count
-    const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
-    const selectedQuestions = shuffled.slice(0, Math.min(questionsCount, allQuestions.length));
-
-    setCurrentInterview({
-      roleId,
-      roleName,
-      difficulty,
-      mode, // 'voice' or 'text'
-      questions: selectedQuestions,
-      currentQuestionIndex: 0,
-      answers: {},
-      durationSeconds: 0,
-      startedAt: new Date().toISOString()
-    });
-    
-    setActiveSession(true);
-  };
-
-  const submitAnswer = (questionId, answerText) => {
+  const submitAnswer = async (questionId, answerText) => {
     if (!currentInterview) return;
     
+    // Update state optimistically for UI responsiveness
     setCurrentInterview(prev => ({
       ...prev,
       answers: {
@@ -57,6 +66,13 @@ export const InterviewProvider = ({ children }) => {
         [questionId]: answerText
       }
     }));
+
+    try {
+      // Save to database
+      await interviewService.saveAnswer(currentInterview.id, questionId, answerText);
+    } catch (error) {
+      console.error("Failed to persist answer in backend", error);
+    }
   };
 
   const setQuestionIndex = (index) => {
@@ -82,32 +98,20 @@ export const InterviewProvider = ({ children }) => {
     setLoading(true);
     
     try {
-      // Evaluate answers via AI service
-      const evaluation = await aiService.evaluateInterview(
-        currentInterview.roleId,
-        currentInterview.questions,
-        currentInterview.answers
+      // Submits completed interview for Groq AI grading
+      const completedRecord = await interviewService.submitInterview(
+        currentInterview.id,
+        currentInterview.durationSeconds
       );
 
-      const record = {
-        role: currentInterview.roleName,
-        difficulty: currentInterview.difficulty,
-        score: evaluation.score,
-        durationSeconds: currentInterview.durationSeconds,
-        questionsCount: currentInterview.questions.length,
-        feedback: evaluation
-      };
-
-      const savedRecord = interviewService.saveInterview(record);
+      // Reload database history list
+      await loadHistory();
       
-      // Update history in state
-      loadHistory();
-      
-      // Reset active interview
+      // Reset active states
       setCurrentInterview(null);
       setActiveSession(false);
       
-      return savedRecord.id;
+      return completedRecord._id;
     } catch (error) {
       console.error("Failed to complete interview evaluation", error);
       throw error;
@@ -121,9 +125,13 @@ export const InterviewProvider = ({ children }) => {
     setActiveSession(false);
   };
 
-  const deleteInterviewHistory = (id) => {
-    const updated = interviewService.deleteInterview(id);
-    setHistory(updated);
+  const deleteInterviewHistory = async (id) => {
+    try {
+      await interviewService.deleteInterview(id);
+      await loadHistory();
+    } catch (error) {
+      console.error("Failed to delete interview history item", error);
+    }
   };
 
   return (
@@ -145,3 +153,5 @@ export const InterviewProvider = ({ children }) => {
     </InterviewContext.Provider>
   );
 };
+
+export default InterviewProvider;
